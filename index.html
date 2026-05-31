@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Car | باشگاه خریداران زرنگ خودرو</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F5C518;
+    --gold-dim: #c9a200;
+    --dark: #0a0a0a;
+    --dark2: #111111;
+    --dark3: #1a1a1a;
+    --dark4: #222222;
+    --text: #e8e8e8;
+    --text-dim: #888;
+    --red: #e63946;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BG texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(245,197,24,0.08) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 48px 0 32px;
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .logo-ring {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 2.5px solid var(--gold);
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark3);
+    box-shadow: 0 0 30px rgba(245,197,24,0.2), inset 0 0 20px rgba(245,197,24,0.05);
+    position: relative;
+  }
+
+  .logo-ring::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,197,24,0.2);
+  }
+
+  .logo-emoji { font-size: 38px; }
+
+  .brand-name {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .brand-tagline {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(245,197,24,0.3);
+    color: var(--gold);
+    background: rgba(245,197,24,0.06);
+    font-weight: 500;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 24px 0;
+    opacity: 0.4;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+  }
+  .divider span { font-size: 10px; color: var(--gold); letter-spacing: 2px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  /* ── FORM CARD ── */
+  .form-card {
+    background: var(--dark2);
+    border: 1px solid rgba(245,197,24,0.15);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease 0.2s both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(245,197,24,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .form-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .form-sub {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.1);
+  }
+
+  .form-textarea { resize: none; height: 80px; }
+
+  .form-select option { background: var(--dark3); }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* radio chips */
+  .chip-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip-input { display: none; }
+
+  .chip-label {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--dark3);
+    user-select: none;
+  }
+
+  .chip-input:checked + .chip-label {
+    border-color: var(--gold);
+    color: var(--dark);
+    background: var(--gold);
+    font-weight: 700;
+  }
+
+  /* submit btn */
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-submit:hover {
+    background: #ffe066;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(245,197,24,0.3);
+  }
+
+  .btn-submit:active { transform: translateY(0); }
+
+  /* ── SUCCESS ── */
+  .success-box {
+    display: none;
+    text-align: center;
+    padding: 32px 20px;
+  }
+  .success-box.show { display: block; }
+  .success-icon { font-size: 48px; margin-bottom: 12px; }
+  .success-title { font-size: 18px; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+  .success-sub { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+  /* ── DASHBOARD PREVIEW ── */
+  .dashboard-card {
+    background: var(--dark2);
+    border: 1px solid rgba(245,197,24,0.12);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease 0.35s both;
+  }
+
+  .lead-list { list-style: none; }
+
+  .lead-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .lead-item:last-child { border-bottom: none; }
+
+  .lead-avatar {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--dark3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .lead-info { flex: 1; }
+  .lead-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .lead-detail { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+
+  .lead-score {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .score-hot { background: rgba(230,57,70,0.15); color: var(--red); border: 1px solid rgba(230,57,70,0.3); }
+  .score-warm { background: rgba(245,197,24,0.12); color: var(--gold); border: 1px solid rgba(245,197,24,0.3); }
+  .score-cool { background: rgba(255,255,255,0.05); color: var(--text-dim); border: 1px solid rgba(255,255,255,0.1); }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .stat-box {
+    background: var(--dark3);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .stat-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  /* ── LINKS ── */
+  .links-card {
+    background: var(--dark2);
+    border: 1px solid rgba(245,197,24,0.12);
+    border-radius: 20px;
+    padding: 20px;
+    animation: fadeUp 0.6s ease 0.5s both;
+  }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: var(--dark3);
+    text-decoration: none;
+    color: var(--text);
+    margin-bottom: 10px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .link-btn:last-child { margin-bottom: 0; }
+
+  .link-btn:hover {
+    border-color: rgba(245,197,24,0.4);
+    background: rgba(245,197,24,0.04);
+    transform: translateX(-3px);
+  }
+
+  .link-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .link-icon.gold { background: rgba(245,197,24,0.12); }
+  .link-icon.green { background: rgba(37,211,102,0.12); }
+  .link-icon.blue { background: rgba(0,136,204,0.12); }
+  .link-icon.red { background: rgba(230,57,70,0.12); }
+
+  .link-text-wrap { flex: 1; }
+  .link-title { font-size: 14px; font-weight: 700; }
+  .link-desc { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+  .link-arrow { font-size: 16px; color: var(--text-dim); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.15);
+    animation: fadeUp 0.5s ease 0.8s both;
+  }
+
+  .footer span { color: var(--gold); opacity: 0.5; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    gap: 6px;
+    background: var(--dark2);
+    padding: 6px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px 6px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    color: var(--text-dim);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .tab-btn .tab-icon { font-size: 16px; }
+
+  .tab-btn.active {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* ── HIDDEN ── */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Admin password */
+  .admin-lock {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .admin-lock-title {
+    font-size: 16px; font-weight: 800; color: var(--gold); margin-bottom: 6px;
+  }
+  .admin-lock-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; }
+
+  .pulse-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 1.5s ease infinite;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* Warning note */
+  .note {
+    background: rgba(245,197,24,0.05);
+    border: 1px solid rgba(245,197,24,0.15);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 11.5px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-top: 14px;
+  }
+  .note strong { color: var(--gold); }
+
+  .anon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-ring">
+      <span class="logo-emoji">🛰️</span>
+    </div>
+    <div class="brand-name">Select Car</div>
+    <div class="brand-tagline">ما ماشین نمی‌فروشیم<br>کمک می‌کنیم ماشین اشتباه نخری</div>
+    <div class="badge-row">
+      <span class="badge">طرف خریداریم</span>
+      <span class="badge">رادار فرصت</span>
+      <span class="badge">ضدضرر</span>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('form')">
+      <span class="tab-icon">🎯</span>تست بودجه
+    </button>
+    <button class="tab-btn" onclick="switchTab('links')">
+      <span class="tab-icon">🔗</span>لینک‌ها
+    </button>
+    <button class="tab-btn" onclick="switchTab('admin')">
+      <span class="tab-icon">📊</span>داشبورد
+    </button>
+  </div>
+
+  <!-- ═══════════ TAB 1: FORM ═══════════ -->
+  <div id="tab-form" class="tab-content active">
+
+    <div class="form-card" id="formWrapper">
+      <div id="formInner">
+        <div class="form-title">🎯 تست انتخاب ماشین مناسب بودجه</div>
+        <div class="form-sub">بودجه‌ات رو بفرست، بگیم چی ارزش بررسی داره و کدوما ممکنه پولتو بخوابونن.</div>
+
+        <div class="anon-badge">🔒 اطلاعاتت محرمانه‌ست و هویتت فاش نمیشه</div>
+
+        <div class="form-group">
+          <label class="form-label">شهر</label>
+          <input class="form-input" id="f-city" type="text" placeholder="مثلاً تهران، اصفهان...">
+        </div>
+
+        <div class="row2">
+          <div class="form-group">
+            <label class="form-label">بودجه نقدی (تومان)</label>
+            <input class="form-input" id="f-budget" type="text" inputmode="numeric" placeholder="مثلاً ۷۵۰ میلیون">
+          </div>
+          <div class="form-group">
+            <label class="form-label">پیش‌پرداخت (اگه قسطی)</label>
+            <input class="form-input" id="f-down" type="text" inputmode="numeric" placeholder="مثلاً ۲۰۰ میلیون">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">هدف از خرید</label>
+          <div class="chip-group">
+            <input class="chip-input" type="radio" name="purpose" id="p1" value="خانواده">
+            <label class="chip-label" for="p1">مصرف خانوادگی</label>
+            <input class="chip-input" type="radio" name="purpose" id="p2" value="کار روزانه">
+            <label class="chip-label" for="p2">کار روزانه</label>
+            <input class="chip-input" type="radio" name="purpose" id="p3" value="خرید و فروش">
+            <label class="chip-label" for="p3">خرید و فروش</label>
+            <input class="chip-input" type="radio" name="purpose" id="p4" value="کم‌خرج">
+            <label class="chip-label" for="p4">کم‌خرج</label>
+            <input class="chip-input" type="radio" name="purpose" id="p5" value="پرستیژ">
+            <label class="chip-label" for="p5">پرستیژ</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">نقدی می‌خوای یا اقساطی؟</label>
+          <div class="chip-group">
+            <input class="chip-input" type="radio" name="paytype" id="pt1" value="نقدی">
+            <label class="chip-label" for="pt1">💵 نقدی</label>
+            <input class="chip-input" type="radio" name="paytype" id="pt2" value="اقساطی">
+            <label class="chip-label" for="pt2">📋 اقساطی</label>
+            <input class="chip-input" type="radio" name="paytype" id="pt3" value="هنوز نمیدونم">
+            <label class="chip-label" for="pt3">🤔 هنوز نمیدونم</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">صفر یا کارکرده؟</label>
+          <div class="chip-group">
+            <input class="chip-input" type="radio" name="cartype" id="ct1" value="صفر">
+            <label class="chip-label" for="ct1">🆕 صفر</label>
+            <input class="chip-input" type="radio" name="cartype" id="ct2" value="کارکرده">
+            <label class="chip-label" for="ct2">🚗 کارکرده</label>
+            <input class="chip-input" type="radio" name="cartype" id="ct3" value="هر دو">
+            <label class="chip-label" for="ct3">هر دو</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">خریدت چقدر فوریه؟</label>
+          <div class="chip-group">
+            <input class="chip-input" type="radio" name="urgency" id="u1" value="همین هفته">
+            <label class="chip-label" for="u1">🔥 همین هفته</label>
+            <input class="chip-input" type="radio" name="urgency" id="u2" value="این ماه">
+            <label class="chip-label" for="u2">این ماه</label>
+            <input class="chip-input" type="radio" name="urgency" id="u3" value="تا ۳ ماه">
+            <label class="chip-label" for="u3">تا ۳ ماه</label>
+            <input class="chip-input" type="radio" name="urgency" id="u4" value="فقط بررسی">
+            <label class="chip-label" for="u4">فقط بررسی</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">ماشین خاصی مدنظر داری؟ (اختیاری)</label>
+          <input class="form-input" id="f-model" type="text" placeholder="مثلاً تیگوان، پژو، سانتافه...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">شماره واتساپ برای ارسال گزینه‌های مناسب</label>
+          <input class="form-input" id="f-phone" type="tel" placeholder="09xxxxxxxxx" style="direction:ltr; text-align:right;">
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()">
+          🚀 بفرست، بگو چی بخرم
+        </button>
+
+        <div class="note">
+          <strong>توجه:</strong> معرفی گزینه به معنی تأیید قطعی معامله نیست. تصمیم نهایی با خریدار بعد از کارشناسی و استعلام مدارک است.
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-box" id="successBox">
+        <div class="success-icon">✅</div>
+        <div class="success-title">ثبت شد!</div>
+        <div class="success-sub">بودجه‌ات دریافت شد.<br>ظرف ۲۴ ساعت گزینه‌های مناسب رو از طریق واتساپ برات می‌فرستیم.<br><br>🔒 اطلاعاتت محرمانه‌ست.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════ TAB 2: LINKS ═══════════ -->
+  <div id="tab-links" class="tab-content">
+
+    <div class="section-label">دسترسی سریع</div>
+
+    <div class="links-card">
+
+      <a class="link-btn" href="https://instagram.com/select_carr" target="_blank">
+        <div class="link-icon red">📱</div>
+        <div class="link-text-wrap">
+          <div class="link-title">پیج اینستاگرام اول</div>
+          <div class="link-desc">@select_carr</div>
+        </div>
+        <div class="link-arrow">←</div>
+      </a>
+
+      <a class="link-btn" href="https://instagram.com/select_carrr" target="_blank">
+        <div class="link-icon red">📱</div>
+        <div class="link-text-wrap">
+          <div class="link-title">پیج اینستاگرام دوم</div>
+          <div class="link-desc">@select_carrr</div>
+        </div>
+        <div class="link-arrow">←</div>
+      </a>
+
+      <a class="link-btn" href="https://wa.me/989023008205" target="_blank">
+        <div class="link-icon green">💬</div>
+        <div class="link-text-wrap">
+          <div class="link-title">واتساپ مستقیم</div>
+          <div class="link-desc">بودجه‌تو بفرست، مسیر بگیر</div>
+        </div>
+        <div class="link-arrow">←</div>
+      </a>
+
+      <a class="link-btn" href="https://ble.ir/select_carr" target="_blank">
+        <div class="link-icon blue">📡</div>
+        <div class="link-text-wrap">
+          <div class="link-title">کانال بله</div>
+          <div class="link-desc">واچ‌لیست فرصت‌های بودجه‌محور</div>
+        </div>
+        <div class="link-arrow">←</div>
+      </a>
+
+      <div class="link-btn" onclick="switchTab('form')">
+        <div class="link-icon gold">🎯</div>
+        <div class="link-text-wrap">
+          <div class="link-title">تست انتخاب هوشمند</div>
+          <div class="link-desc">با بودجه‌ات چی بخری؟</div>
+        </div>
+        <div class="link-arrow">←</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ═══════════ TAB 3: ADMIN DASHBOARD ═══════════ -->
+  <div id="tab-admin" class="tab-content">
+
+    <div id="adminLock">
+      <div class="admin-lock">
+        <div class="admin-lock-title">🔐 داشبورد مدیریت لید</div>
+        <div class="admin-lock-sub">رمز ورود را وارد کن</div>
+        <input class="form-input" id="adminPass" type="password" placeholder="رمز عبور" style="max-width:220px; margin: 0 auto 12px; display:block;">
+        <button class="btn-submit" style="max-width:220px; margin: 0 auto;" onclick="checkAdmin()">ورود</button>
+      </div>
+    </div>
+
+    <div id="adminPanel" style="display:none;">
+      <div class="section-label">
+        آمار این ماه <span class="pulse-dot"></span>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-num" id="statTotal">0</div>
+            <div class="stat-label">کل لید</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" id="statHot">0</div>
+            <div class="stat-label">🔥 داغ</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" id="statWarm">0</div>
+            <div class="stat-label">⚡ گرم</div>
+          </div>
+        </div>
+
+        <div class="section-label">آخرین لیدها</div>
+        <ul class="lead-list" id="leadList">
+          <li style="text-align:center; color: var(--text-dim); font-size:13px; padding: 20px 0;">هنوز لیدی ثبت نشده</li>
+        </ul>
+
+        <button class="btn-submit" style="background:var(--dark3); color:var(--text-dim); margin-top:14px; border: 1px solid rgba(255,255,255,0.1);" onclick="exportLeads()">
+          📥 خروجی CSV بگیر
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    select_carrr &nbsp;|&nbsp; <span>طرف خریداریم</span>
+  </div>
+
+</div>
+
+<script>
+  // ── TABS ──
+  function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget && event.currentTarget.classList.add('active');
+    // fix active btn
+    const btns = document.querySelectorAll('.tab-btn');
+    const map = { form: 0, links: 1, admin: 2 };
+    btns.forEach(b => b.classList.remove('active'));
+    btns[map[name]].classList.add('active');
+  }
+
+  // ── SCORE LEAD ──
+  function scoreLead(data) {
+    let score = 0;
+    if (data.budget && parseInt(data.budget) > 0) score += 2;
+    if (data.city && data.city.trim()) score += 1;
+    if (data.urgency === 'همین هفته' || data.urgency === 'این ماه') score += 3;
+    if (data.paytype === 'نقدی') score += 2;
+    if (data.paytype === 'اقساطی' && data.down && parseInt(data.down) > 0) score += 2;
+    if (data.phone && data.phone.trim().length >= 10) score += 2;
+    if (data.model && data.model.trim()) score += 1;
+    return score;
+  }
+
+  function scoreLabel(s) {
+    if (s >= 8) return { label: '🔥 داغ', cls: 'score-hot' };
+    if (s >= 5) return { label: '⚡ گرم', cls: 'score-warm' };
+    return { label: '👁 کنجکاو', cls: 'score-cool' };
+  }
+
+  // ── STORAGE ──
+  let leads = JSON.parse(localStorage.getItem('sc_leads') || '[]');
+
+  function saveLeads() {
+    localStorage.setItem('sc_leads', JSON.stringify(leads));
+  }
+
+  // ── SUBMIT FORM ──
+  // تبدیل اعداد فارسی به انگلیسی
+  function toEnNum(str) {
+    return String(str).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+  }
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzEscaZzUvSJhVlCgREUGeQbYcMgwIzPAhxS2Bk_aXOkEjykokc79oE8007XWDQA73K/exec';
+
+  function submitForm() {
+    const city = document.getElementById('f-city').value;
+    const budget = document.getElementById('f-budget').value;
+    const down = document.getElementById('f-down').value;
+    const phone = document.getElementById('f-phone').value;
+    const model = document.getElementById('f-model').value;
+    const purpose = document.querySelector('input[name="purpose"]:checked')?.value || '';
+    const paytype = document.querySelector('input[name="paytype"]:checked')?.value || '';
+    const cartype = document.querySelector('input[name="cartype"]:checked')?.value || '';
+    const urgency = document.querySelector('input[name="urgency"]:checked')?.value || '';
+
+    if (!budget || !phone) {
+      alert('لطفاً حداقل بودجه و شماره واتساپت رو وارد کن.');
+      return;
+    }
+
+    const data = { city, budget: toEnNum(budget), down: toEnNum(down), phone: toEnNum(phone), model, purpose, buy_type: paytype, cartype, urgency, ts: new Date().toISOString() };
+    data.score = scoreLead(data);
+    data.tier = data.score >= 8 ? 'hot' : data.score >= 5 ? 'warm' : 'cold';
+    leads.unshift(data);
+    saveLeads();
+
+    // ارسال به Google Sheets
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).catch(err => console.log('Sheet error:', err));
+
+    document.getElementById('formInner').style.display = 'none';
+    document.getElementById('successBox').classList.add('show');
+  }
+
+  // ── ADMIN ──
+  const PASS = 'selectcar2025'; // <-- رمز رو اینجا عوض کن
+
+  function checkAdmin() {
+    const p = document.getElementById('adminPass').value;
+    if (p === PASS) {
+      document.getElementById('adminLock').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      renderDashboard();
+    } else {
+      alert('رمز اشتباه است.');
+    }
+  }
+
+  function renderDashboard() {
+    const hot = leads.filter(l => l.score >= 8).length;
+    const warm = leads.filter(l => l.score >= 5 && l.score < 8).length;
+    document.getElementById('statTotal').textContent = leads.length;
+    document.getElementById('statHot').textContent = hot;
+    document.getElementById('statWarm').textContent = warm;
+
+    const list = document.getElementById('leadList');
+    if (leads.length === 0) {
+      list.innerHTML = '<li style="text-align:center; color: var(--text-dim); font-size:13px; padding: 20px 0;">هنوز لیدی ثبت نشده</li>';
+      return;
+    }
+
+    list.innerHTML = leads.slice(0, 20).map(l => {
+      const s = scoreLabel(l.score);
+      const emoji = l.urgency === 'همین هفته' ? '🔥' : l.urgency === 'این ماه' ? '⚡' : '👁';
+      return `<li class="lead-item">
+        <div class="lead-avatar">${emoji}</div>
+        <div class="lead-info">
+          <div class="lead-name">${l.phone || 'بدون شماره'} — ${l.city || 'نامشخص'}</div>
+          <div class="lead-detail">💰 ${l.budget || '—'} میلیون | ${l.paytype || '—'} | ${l.urgency || '—'}</div>
+        </div>
+        <div class="lead-score ${s.cls}">${s.label}</div>
+      </li>`;
+    }).join('');
+  }
+
+  function exportLeads() {
+    if (leads.length === 0) { alert('لیدی وجود ندارد.'); return; }
+    const header = 'شهر,بودجه,پیش‌پرداخت,شماره,مدل,هدف,نقدی/اقساطی,صفر/کارکرده,فوریت,امتیاز,تاریخ';
+    const rows = leads.map(l =>
+      [l.city, l.budget, l.down, l.phone, l.model, l.purpose, l.paytype, l.cartype, l.urgency, l.score, l.ts].join(',')
+    );
+    const csv = '\uFEFF' + [header, ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'leads_selectcar.csv';
+    a.click();
+  }
+</script>
+</body>
+</html>
