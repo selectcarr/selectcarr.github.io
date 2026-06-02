@@ -614,21 +614,21 @@
       <span class="logo-emoji">🛰️</span>
     </div>
     <div class="brand-name">Select Car</div>
-    <div class="brand-tagline">ما ماشین نمی‌فروشیم<br>کمک می‌کنیم ماشین اشتباه نخری</div>
+    <div class="brand-tagline">همراه مطمئن شما در خرید و فروش خودرو</div>
     <div class="badge-row">
-      <span class="badge">طرف خریداریم</span>
-      <span class="badge">رادار فرصت</span>
-      <span class="badge">ضدضرر</span>
+      <span class="badge">همراه خریدار و فروشنده‌ایم</span>
+      <span class="badge">معامله امن</span>
+      <span class="badge">مشاوره بی‌طرف</span>
     </div>
   </div>
 
   <!-- TAB NAV -->
   <div class="tab-nav">
     <a class="tab-btn active" href="#form" data-tab="form">
-      <span class="tab-icon">🎯</span>خریدار خودرو
+      <span class="tab-icon">🎯</span>خریدار خودرو هستم
     </a>
     <a class="tab-btn" href="#sell" data-tab="sell">
-      <span class="tab-icon">🚗</span>فروش ماشین
+      <span class="tab-icon">🚗</span>فروشنده خودرو هستم
     </a>
     <a class="tab-btn" href="#links" data-tab="links">
       <span class="tab-icon">🔗</span>لینک‌ها
@@ -940,7 +940,7 @@
   </div>
 
   <div class="footer">
-    select_carrr &nbsp;|&nbsp; <span>طرف خریداریم</span>
+    select_carrr &nbsp;|&nbsp; <span>همراه خریدار و فروشنده‌ایم</span>
   </div>
 
 </div>
@@ -1065,13 +1065,13 @@
     const cartype = document.querySelector('input[name="cartype"]:checked')?.value || '';
     const urgency = document.querySelector('input[name="urgency"]:checked')?.value || '';
 
-    if (!budget || !phone || toEnNum(phone).replace(/[^0-9]/g,'').length < 11) {
-      alert('لطفاً بودجه و شماره واتساپ ۱۱ رقمی وارد کن.');
+    if (!budget || !phone || toEnNum(phone).replace(/[^0-9]/g,'').length !== 11) {
+      alert('لطفاً بودجه و شماره واتساپ ۱۱ رقمی معتبر وارد کن.');
       return;
     }
 
     const msg =
-`درخواست خریدار خودرو
+`درخواست خریدار خودرو هستم
 --------------------
 شهر: ${city || '-'}
 بودجه نقدی: ${budget || '-'}
@@ -1129,8 +1129,8 @@ function selectSellChip(el, group) {
     const paint = getPaintSelected();
     const desc = document.getElementById('s-desc').value.trim();
 
-    if (!phone || toEnNum(phone).replace(/[^0-9]/g,'').length < 11 || !model || !price) {
-      alert('لطفاً شماره واتساپ، مدل خودرو و قیمت را کامل وارد کن.');
+    if (!phone || toEnNum(phone).replace(/[^0-9]/g,'').length !== 11 || !model || !price) {
+      alert('لطفاً شماره واتساپ ۱۱ رقمی، مدل خودرو و قیمت را کامل وارد کن.');
       return;
     }
 
