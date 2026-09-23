@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Select Car | ثبت درخواست خرید و فروش</title>
+<style>
+:root{--bg:#0b0b0b;--card:#111111;--soft:#171717;--gold:#F5B942;--text:#fff;--muted:#c9c9c9;--wa:#25D366;--tg:#229ED9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+.wrap{max-width:520px;margin:auto;padding:18px 16px 80px}.brand{text-align:center;padding:22px 0 18px}
+.brand-title{color:var(--gold);font-size:24px;font-weight:900;letter-spacing:1px}.brand-sub{color:var(--muted);font-size:12px;margin-top:7px}
+.tabs{display:flex;gap:8px;margin-bottom:16px}.tab{flex:1;border:1px solid #292929;background:var(--card);color:var(--muted);border-radius:12px;padding:12px 8px;font-weight:800;cursor:pointer}
+.tab.active{background:var(--gold);color:#111;border-color:var(--gold)}.panel{background:var(--card);border:1px solid #242424;border-radius:18px;padding:18px}
+.group{margin-bottom:14px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+input,select,textarea{width:100%;border:1px solid #2a2a2a;background:var(--soft);color:white;border-radius:11px;padding:12px;font-family:inherit;font-size:14px;outline:none}
+textarea{min-height:80px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.submit{width:100%;border:0;border-radius:12px;padding:15px;background:var(--gold);color:#111;font-weight:900;font-size:15px;cursor:pointer;margin-top:6px}
+.hidden{display:none!important}.result{margin-top:16px;background:#101510;border:1px solid #263526;border-radius:14px;padding:14px}.result-title{color:var(--gold);font-weight:900;margin-bottom:8px}
+.action{display:block;width:100%;text-align:center;text-decoration:none;border-radius:11px;padding:13px;font-weight:900;margin-top:9px}.telegram{background:var(--tg);color:#fff}.whatsapp{background:var(--wa);color:#071007}
+.small,.note{font-size:11px;color:var(--muted);line-height:1.8;margin-top:10px}.error{color:#ff7b83;font-size:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><div class="brand-title">SELECT CAR</div><div class="brand-sub">ثبت درخواست خرید و فروش خودرو</div></div>
+  <div class="tabs"><button class="tab active" id="buyTab">خریدار هستم</button><button class="tab" id="sellTab">فروشنده هستم</button></div>
+
+  <div class="panel" id="buyPanel">
+    <div class="group"><label>شهر</label><input id="bCity" placeholder="مثلاً تهران"></div>
+    <div class="row"><div class="group"><label>بودجه نقدی</label><input id="bBudget" inputmode="numeric" placeholder="مثلاً 1500000000"></div><div class="group"><label>پیش‌پرداخت</label><input id="bDown" inputmode="numeric" placeholder="اختیاری"></div></div>
+    <div class="group"><label>خودروی مدنظر</label><input id="bModel" placeholder="مثلاً پژو 207 اتومات"></div>
+    <div class="row"><div class="group"><label>نوع پرداخت</label><select id="bPay"><option value="نقدی">نقدی</option><option value="اقساطی">اقساطی</option><option value="هنوز نمیدونم">هنوز نمی‌دانم</option></select></div><div class="group"><label>صفر یا کارکرده</label><select id="bCondition"><option value="هر دو">هر دو</option><option value="صفر">صفر</option><option value="کارکرده">کارکرده</option></select></div></div>
+    <div class="group"><label>فوریت خرید</label><select id="bUrgency"><option>همین هفته</option><option>این ماه</option><option>تا ۳ ماه</option><option>فقط بررسی</option></select></div>
+    <div class="group"><label>هدف خرید</label><select id="bPurpose"><option>مصرف خانوادگی</option><option>کار روزانه</option><option>خرید و فروش</option><option>کم‌خرج</option><option>پرستیژ</option></select></div>
+    <div class="group"><label>شماره واتساپ</label><input id="bPhone" inputmode="tel" placeholder="09xxxxxxxxx"></div>
+    <button class="submit" id="buySubmit">ثبت درخواست خرید</button>
+  </div>
+
+  <div class="panel hidden" id="sellPanel">
+    <div class="group"><label>شهر</label><input id="sCity" placeholder="مثلاً تهران"></div>
+    <div class="group"><label>مدل و سال خودرو</label><input id="sModel" placeholder="مثلاً پژو پارس 1401"></div>
+    <div class="row"><div class="group"><label>کارکرد</label><input id="sKm" inputmode="numeric" placeholder="کیلومتر"></div><div class="group"><label>قیمت پیشنهادی</label><input id="sPrice" inputmode="numeric" placeholder="تومان"></div></div>
+    <div class="group"><label>وضعیت بدنه</label><input id="sBody" placeholder="مثلاً بدون رنگ"></div>
+    <div class="group"><label>وضعیت فنی</label><select id="sMechanical"><option>سالم</option><option>نیاز به تعمیر</option></select></div>
+    <div class="group"><label>فوریت فروش</label><select id="sUrgency"><option>همین هفته</option><option>این ماه</option><option>بدون عجله</option></select></div>
+    <div class="group"><label>شماره واتساپ</label><input id="sPhone" inputmode="tel" placeholder="09xxxxxxxxx"></div>
+    <div class="group"><label>توضیحات</label><textarea id="sDescription" placeholder="اختیاری"></textarea></div>
+    <button class="submit" id="sellSubmit">ثبت درخواست فروش</button>
+  </div>
+
+  <div class="result hidden" id="resultBox">
+    <div class="result-title">درخواست آماده شد</div>
+    <div class="small">برای ثبت درخواست در بانک و ارسال مستقیم به Select Car، هر دو دکمه زیر را بزن.</div>
+    <a class="action telegram" id="telegramButton" href="#">ثبت در بانک از طریق تلگرام</a>
+    <a class="action whatsapp" id="whatsappButton" href="#">ارسال مستقیم در واتساپ</a>
+  </div>
+
+  <div class="error" id="errorBox"></div>
+  <div class="note">اطلاعات تماس فقط برای پیگیری خصوصی استفاده می‌شود.</div>
+</div>
+
+<script>
+const TELEGRAM_BOT="Select_Carr_Leads_bot";
+const WHATSAPP_NUMBER="989023008205";
+const byId=id=>document.getElementById(id);
+
+function onlyDigits(value){
+  return String(value||"")
+    .replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    .replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d))
+    .replace(/[^0-9]/g,"");
+}
+function textValue(id){return byId(id).value.trim();}
+function createId(prefix){return prefix+"-"+Date.now()+"-"+Math.random().toString(36).substring(2,8);}
+function showBuy(){byId("buyPanel").classList.remove("hidden");byId("sellPanel").classList.add("hidden");byId("buyTab").classList.add("active");byId("sellTab").classList.remove("active");byId("resultBox").classList.add("hidden");byId("errorBox").textContent="";}
+function showSell(){byId("sellPanel").classList.remove("hidden");byId("buyPanel").classList.add("hidden");byId("sellTab").classList.add("active");byId("buyTab").classList.remove("active");byId("resultBox").classList.add("hidden");byId("errorBox").textContent="";}
+function prepareLinks(message){
+  byId("telegramButton").href="https://t.me/"+TELEGRAM_BOT+"?text="+encodeURIComponent(message);
+  byId("whatsappButton").href="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);
+  byId("resultBox").classList.remove("hidden");
+  byId("resultBox").scrollIntoView({behavior:"smooth",block:"center"});
+}
+byId("buyTab").addEventListener("click",showBuy);
+byId("sellTab").addEventListener("click",showSell);
+
+byId("buySubmit").addEventListener("click",()=>{
+  const phone=onlyDigits(textValue("bPhone")), budget=onlyDigits(textValue("bBudget"));
+  if(phone.length!==11){byId("errorBox").textContent="شماره واتساپ باید ۱۱ رقمی باشد.";return;}
+  if(!budget){byId("errorBox").textContent="بودجه را وارد کن.";return;}
+  const message=["#SCBUY","version:1","id:"+createId("BUY"),"phone:"+phone,"city:"+textValue("bCity"),"budget:"+budget,"down:"+onlyDigits(textValue("bDown")),"model:"+textValue("bModel"),"payment:"+textValue("bPay"),"condition:"+textValue("bCondition"),"urgency:"+textValue("bUrgency"),"purpose:"+textValue("bPurpose"),"source:website","campaign:","content:"].join("\n");
+  prepareLinks(message);
+});
+
+byId("sellSubmit").addEventListener("click",()=>{
+  const phone=onlyDigits(textValue("sPhone")), price=onlyDigits(textValue("sPrice"));
+  if(phone.length!==11){byId("errorBox").textContent="شماره واتساپ باید ۱۱ رقمی باشد.";return;}
+  if(!textValue("sModel")){byId("errorBox").textContent="مدل خودرو را وارد کن.";return;}
+  if(!price){byId("errorBox").textContent="قیمت خودرو را وارد کن.";return;}
+  const message=["#SCSELL","version:1","id:"+createId("SELL"),"phone:"+phone,"city:"+textValue("sCity"),"model:"+textValue("sModel"),"mileage:"+onlyDigits(textValue("sKm")),"price:"+price,"body:"+textValue("sBody"),"mechanical:"+textValue("sMechanical"),"urgency:"+textValue("sUrgency"),"description:"+textValue("sDescription"),"source:website","campaign:","content:"].join("\n");
+  prepareLinks(message);
+});
+</script>
+</body>
+</html>
